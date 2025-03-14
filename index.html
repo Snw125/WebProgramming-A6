@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Web Programming Assignment 6 API Fun</title>
+    </head>
+    <script>
+        function getduck(filetype) {
+            if (filetype == 'jpg') {
+                res = fetch("https://random-d.uk/api/random?type=jpg")
+                      .then (res => res.text())
+                      .then (data => {
+                                data = JSON.parse(data);
+                                var resElem = document.getElementById("result").getElementById("img");
+                                resElem.src = data.url;
+                })
+                .catch (error => console.log(error))
+            }
+            else if (filetype == 'gif') {
+                res = fetch("https://random-d.uk/api/random?type=gif")
+                      .then (res => res.text())
+                      .then (data => {
+                                data = JSON.parse(data);
+                                var resElem = document.getElementById("result").getElementById("img");
+                                resElem.src = data.url;
+                })
+                .catch (error => console.log(error))
+            }
+        }
+    </script>
+    <body>
+        <div>
+            <h3>Duck Generator</h3>
+
+            <button id="jpg_but" onclick="getduck('jpg')">I want to see a Duck JPG!</button>
+            <button id="gif_but" onclick="getduck('gif')">I want to see a Duck GIF!</button>
+
+            <div id="result"><img src="duck.png" width="50%"></img></div>
+        </div>
+        <div>
+            <p>I selected this API because ducks are cute</p>
+            <p>I found the API on this list here: https://github.com/public-apis/public-apis</p>
+            <p>I needed to provide the type of file you want, gif or jpg</p>
+            <p>This API would be helpful if someone wanted to see ducks to cheer them up
+                after having a bad day. It could make someone's day, it definitely made mine</p>
+        </div>
+
+    </body>
+</html>
