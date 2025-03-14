@@ -1,45 +1,98 @@
 <html>
     <head>
         <title>Web Programming Assignment 6 API Fun</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
     </head>
     <script>
-        function getduck(filetype) {
-            if (filetype == 'jpg') {
-                res = fetch("https://random-d.uk/api/random?type=jpg")
-                      .then (res => res.text())
+        function getcat(cattype) {
+            if (cattype == 'cat') {
+                res = fetch("https://api.thecatapi.com/v1/images/search?api_key=live_SJoYF6TqYJBCGhDR0H9Bj5Kr3MzwxV7Ud68Go2yWjfoifdAGE0Fa4j5mCEovW1Ms")
+                      .then (res => res.json())
                       .then (data => {
-                                data = JSON.parse(data);
-                                var resElem = document.getElementById("result").getElementById("img");
-                                resElem.src = data.url;
+                                var resElem = document.getElementById("result");
+                                resElem.src = data[0].url;
                 })
                 .catch (error => console.log(error))
             }
-            else if (filetype == 'gif') {
-                res = fetch("https://random-d.uk/api/random?type=gif")
-                      .then (res => res.text())
+            else if (cattype == 'beng') {
+                res = fetch("https://api.thecatapi.com/v1/images/search?breed_ids=beng&?api_key=live_SJoYF6TqYJBCGhDR0H9Bj5Kr3MzwxV7Ud68Go2yWjfoifdAGE0Fa4j5mCEovW1Ms")
+                      .then (res => res.json())
                       .then (data => {
-                                data = JSON.parse(data);
-                                var resElem = document.getElementById("result").getElementById("img");
-                                resElem.src = data.url;
+                                // console.log(data);
+                                var resElem = document.getElementById("result");
+                                resElem.src = data[0].url;
+                })
+                .catch (error => console.log(error))
+            }
+            else if (cattype == 'abys') {
+                res = fetch("https://api.thecatapi.com/v1/images/search?breed_ids=abys&?api_key=live_SJoYF6TqYJBCGhDR0H9Bj5Kr3MzwxV7Ud68Go2yWjfoifdAGE0Fa4j5mCEovW1Ms")
+                      .then (res => res.json())
+                      .then (data => {
+                                // console.log(data);
+                                var resElem = document.getElementById("result");
+                                resElem.src = data[0].url;
                 })
                 .catch (error => console.log(error))
             }
         }
     </script>
+    <style>
+        body {
+            justify-content: center;
+            align-items: center; 
+            text-align: center; 
+            font-family: "Sour Gummy", serif;
+            background-color: beige;
+            color: #7c51b9;
+        }
+
+        .main_link {
+            color: #451d7e;
+        }
+        .main_link:hover {
+            color: #ffc649;
+        }
+
+        .btn {
+            color: #7c51b9;
+            border: 3px solid #7c51b9;
+            background-color: #f2ffb2;
+            padding: 3px 10px;
+            font-size: 15px;
+            font-family: "Sour Gummy", serif;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #7c51b9;
+            color: white;
+        }
+        
+    </style>
     <body>
-        <div>
-            <h3>Duck Generator</h3>
+        <div class="main">
+            <h2>Cat Generator</h2>
 
-            <button id="jpg_but" onclick="getduck('jpg')">I want to see a Duck JPG!</button>
-            <button id="gif_but" onclick="getduck('gif')">I want to see a Duck GIF!</button>
+            <button class="btn" id="jpg_but" onclick="getcat('cat')">
+                I want to see a Cat!</button>
+            <button class="btn" id="gif_but" onclick="getcat('beng')">
+                I want to see a Bengal Cat!</button>
+            <button class="btn" id="gif_but" onclick="getcat('abys')">
+                I want to see a Abyssinian Cat!</button>
 
-            <div id="result"><img src="duck.png" width="50%"></img></div>
+            <div><img src="cat.png" id="result" width="50%"></img></div>
         </div>
         <div>
-            <p>I selected this API because ducks are cute</p>
-            <p>I found the API on this list here: https://github.com/public-apis/public-apis</p>
-            <p>I needed to provide the type of file you want, gif or jpg</p>
-            <p>This API would be helpful if someone wanted to see ducks to cheer them up
+            <p>I selected this API because cats are cute</p>
+            <p>I found the API on this list here: <a class="main_link" href="https://github.com/public-apis/public-apis">https://github.com/public-apis/public-apis</a></p>
+            <p>For the request, I needed to provide the breed of cat you want</p>
+            <p>This API would be helpful if someone wanted to see cats to cheer them up
                 after having a bad day. It could make someone's day, it definitely made mine</p>
         </div>
 
